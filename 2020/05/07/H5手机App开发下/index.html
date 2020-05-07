@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"shanzhegu.gitee.io","root":"/blog/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="新人学习手机 App 开发，总要选择一条学习路径。 如果你熟悉 Java 语言，可以学习安卓开发；如果熟悉脚本语言（比如 Python 或 Ruby），可以学习 Swift 语言，进行 iOS 开发；如果像我一样，比较熟悉 Web 网页技术，那么 H5 开发是最容易上手的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="H5 手机 App 开发 - 技术篇">
+<meta property="og:url" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/index.html">
+<meta property="og:site_name" content="山鹧鸪">
+<meta property="og:description" content="新人学习手机 App 开发，总要选择一条学习路径。 如果你熟悉 Java 语言，可以学习安卓开发；如果熟悉脚本语言（比如 Python 或 Ruby），可以学习 Swift 语言，进行 iOS 开发；如果像我一样，比较熟悉 Web 网页技术，那么 H5 开发是最容易上手的。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app1.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app2.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app3.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app4.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app5.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app6.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app7.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app8.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app9.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app10.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app11.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app12.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app13.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app14.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app15.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app16.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app17.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app18.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app19.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app20.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app21.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app22.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app23.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app24.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app25.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app26.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app27.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app28.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app29.jpg">
+<meta property="og:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app30.jpg">
+<meta property="article:published_time" content="2020-05-07T08:50:22.000Z">
+<meta property="article:modified_time" content="2020-05-07T03:02:25.497Z">
+<meta property="article:author" content="Shanzhegu">
+<meta property="article:tag" content="手机App">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app1.jpg">
+
+<link rel="canonical" href="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>H5 手机 App 开发 - 技术篇 | 山鹧鸪</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">山鹧鸪</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">最难得的是一颗平常心</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shanzhegu.gitee.io/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Shanzhegu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="山鹧鸪">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          H5 手机 App 开发 - 技术篇
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-07 16:50:22 / 修改时间：11:02:25" itemprop="dateCreated datePublished" datetime="2020-05-07T16:50:22+08:00">2020-05-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>新人学习手机 App 开发，总要选择一条学习路径。</p>
+<p>如果你熟悉 Java 语言，可以学习安卓开发；如果熟悉脚本语言（比如 Python 或 Ruby），可以学习 Swift 语言，进行 iOS 开发；如果像我一样，比较熟悉 Web 网页技术，那么 H5 开发是最容易上手的。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app1.jpg" class="" title="This is an H5 example image">
+</div>
+
+<a id="more"></a>
+
+<p>所谓 H5 页面，其实就是 混合 App 的前端，外面是一个原生的壳，里面是Web网页。本文紧接上一篇，介绍 手机 App 开发 的技术栈，尤其是跟 H5开发 相关的技术。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app2.jpg" class="" title="This is an H5 example image">
+</div>
+
+
+
+<h1 id="手机-App-的技术栈"><a href="#手机-App-的技术栈" class="headerlink" title="手机 App 的技术栈"></a>手机 App 的技术栈</h1><p>手机 App 的技术栈，可以分为三类：</p>
+<h2 id="原生-App-技术栈-（native-technology-stack）"><a href="#原生-App-技术栈-（native-technology-stack）" class="headerlink" title="原生 App 技术栈 （native technology stack）"></a>原生 App 技术栈 （native technology stack）</h2><p><em>原生技术栈指的是，只能用于特定手机平台的开发技术</em>。比如，安卓平台的 Java 技术栈，iOS 平台的 Object-C 技术栈或 Swift 技术栈。</p>
+<p>这种技术栈只能用在一个平台，不能跨平台。</p>
+<p>很显然不支持跨平台，就是他的短处</p>
+<h2 id="混合-App-技术栈-（hybrid-technology-stack）"><a href="#混合-App-技术栈-（hybrid-technology-stack）" class="headerlink" title="混合 App 技术栈 （hybrid technology stack）"></a>混合 App 技术栈 （hybrid technology stack）</h2><p>混合技术栈指的是开发混合 App 的技术，也就是<em>把 Web 网页放到特定的容器中，然后再打包成各个平台的原生 App</em>。所以，混合技术栈其实是 Web 技术栈 + 容器技术栈，典型代表是 PhoneGap、Cordova、Ionic 等框架。</p>
+<p>如果已经掌握了 Web 技术，这个<em>技术栈就主要学习容器提供的 API Bridge</em>，网页通过它们去调用底层硬件的 API。</p>
+<h2 id="跨平台-App-技术栈-（cross-platform-technology-stack）"><a href="#跨平台-App-技术栈-（cross-platform-technology-stack）" class="headerlink" title="跨平台 App 技术栈 （cross-platform technology stack）"></a>跨平台 App 技术栈 （cross-platform technology stack）</h2><p>跨平台技术栈指的是使用一种技术，同时支持多个手机平台。<em>它与混合技术栈的区别是，不使用 Web 技术，即它的页面不是 HTML5 页面，而是使用自己的语法写的 UI 层，然后编译成各平台的原生 App</em>。</p>
+<p>这个技术栈就是<em>纯粹的容器技术栈</em>，React Native、Xamarin、Flutter 都属于这一类。学习时，除了学习容器的 API Bridge，还要学习容器提供的 UI 层，即怎么写页面。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>H5 开发主要用在混合技术栈。但是跨平台技术栈的某些容器也会用到 H5 (比如 React Native)，因为它们的 UI 层借鉴了 Web 模型。</p>
+<p>另外，混合技术栈、跨平台技术栈的基础，都是原生技术栈，因为最终都要编译成原生App。所以不管使用哪一种技术栈，多多少少要了解一些各平台的原生技术。</p>
+<p>下面就依次介绍上面三类技术栈，每个技术栈都会给出一个最简单的例子：<em>加载网页</em>。通过各种技术栈加载网页的不同做法，帮助大家理解它们的特点，对 App 的技术实现有一个总体的认识。</p>
+<h1 id="WebView-控件"><a href="#WebView-控件" class="headerlink" title="WebView 控件"></a>WebView 控件</h1><p>讲解具体的技术栈之前，大家需要知道，不管什么技术，最终<em>在 App 里面显示网页，一定需要一个网页引擎，这样才能解析网页。</em></p>
+<p>通常情况下，App 内部会使用 WebView 控件作为网页引擎。这是系统自带的控件，专门用来显示网页。应用程序的界面，只要放上 WebView，就好像内嵌了浏览器窗口，就可以显示网页。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app3.jpg" class="" title="This is an H5 example image">
+</div>
+
+<p>不同的 App 技术栈要显示网页，区别仅在于怎么处理 WebView 这个原生控件</p>
+<ul>
+<li>原生技术栈，需要开发者自己把 WebView 控件放在页面上</li>
+<li>混合技术栈，页面本身就是网页，默认在 WebView 中显示</li>
+<li>跨平台技术栈，提供一个 WebView 语法，编译的时候将其转换为原生的 WebView</li>
+</ul>
+<p>不同系统的 WebView 控件名称不一样，安卓系统就叫 WebView，iOS 系统有较老的 UIWebView，也有较新的 WKWebView，作用都是一样的，差别仅在于功能的强弱</p>
+<h1 id="原生技术栈"><a href="#原生技术栈" class="headerlink" title="原生技术栈"></a>原生技术栈</h1><p>原生技术栈分为 安卓 和 iOS 两个平台。</p>
+<p>简单说，iOS 的原生技术栈就是使用 Object-C 语言 或 Swift 语言，在 Xcode 开发环境中编程。安卓的原生技术栈，则使用 Java 语言 或 Kotlin 语言，开发环境是 Android Studio。</p>
+<h2 id="Xcode"><a href="#Xcode" class="headerlink" title="Xcode"></a>Xcode</h2><p>iOS 开发需要安装 Xcode。它是一种集成开发环境（IDE），也是苹果公司指定的 iOS 官方开发工具，所有苹果手机的 App 都由它打包生成。</p>
+<p>它可以在 Mac 电脑上通过应用商店免费安装。注意，Xcode 只支持 Mac 系统，不支持其他系统。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app4.jpg" class="" title="Xcode">
+</div>
+
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app5.jpg" class="" title="Xcode">
+</div>
+
+<p>安装完成后，打开新建一个项目，类型是单视图 App，然后系统会询问一些项目参数和储存位置，这里就不详细说明了。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app6.jpg" class="" title="Xcode">
+</div>
+
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app7.jpg" class="" title="Xcode">
+</div>
+
+<p>然后，就进入了开发环境。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app8.jpg" class="" title="Xcode">
+</div>
+
+<p>左侧的目录树里面，找到 <span style="color: red;">ViewController.swifter</span> 文件，它负责视图逻辑。按照<a href="https://developer.apple.com/documentation/webkit/wkwebview" target="_blank" rel="noopener">官方文档</a>，填入下面的代码。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app9.jpg" class="" title="Xcode">
+</div>
+
+<p>上面代码的意思是，启动 App 加载视图的时候（<span style="color: red;">loadView()</span>），新建一个 WebView 控件的实例。视图加载成功后（<span style="color: red;">viewDidLoad()</span>），WebView 再去加载外部网页（红框部分）。</p>
+<p>然后，就可以查看代码运行结果。点击工具栏的运行按钮，Xcode 就会弹出一个 iPhone 模拟器，里面就是当前代码的运行结果。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app10.jpg" class="" title="Xcode">
+</div>
+
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app11.jpg" class="" title="Xcode">
+</div>
+
+<p>如果一切正常，就可以让 Xcode 对源码打包，生成 App 的二进制安装文件。</p>
+<h2 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a>Android Studio</h2><p>安卓的官方开发工具是 Android Studio，可以去<a href="https://developer.android.com/studio" target="_blank" rel="noopener">官网</a>下载。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app12.jpg" class="" title="Xcode">
+</div>
+
+<p>安装完成后，打开新建一个项目，类型是”Empty Activity”。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app13.jpg" class="" title="Xcode">
+</div>
+
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app14.jpg" class="" title="Xcode">
+</div>
+
+<p>Android Studio 会询问项目参数，包括项目名称、开发语言（Java）等，然后就进入了开发环境。因为它是基于 Java IDE 修改的，懂 Java 的朋友应该对这个界面比较熟悉。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app15.jpg" class="" title="Xcode">
+</div>
+
+<p>按照网上的这篇<a href="https://codingislove.com/android-web-view/" target="_blank" rel="noopener">教程</a>，接下来需要修改三个文件，其中最主要的是把 <span style="color: red;">MainActivity.java</span> 文件改成下面这样。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app16.jpg" class="" title="Xcode">
+</div>
+
+<p>上面红框处的代码，就是在页面上添加并设置 WebView 实例，指定生成视图的时候（<span style="color: red;">onCreate()</span>），WebView 实例去加载外部网页。</p>
+<p>运行代码之前，Android Studio 要求必须连接真机，或安装安卓模拟器。完成以后后，在工具栏上点击运行按钮，就可以运行代码查看效果了。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app17.jpg" class="" title="Xcode">
+</div>
+
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app18.jpg" class="" title="Xcode">
+</div>
+
+<p>如果一切正常，就可以让 Android Studio 打包，生成 App 的二进制安装文件。</p>
+<h1 id="混合技术栈"><a href="#混合技术栈" class="headerlink" title="混合技术栈"></a>混合技术栈</h1><p>上面的原生技术栈需要自己新建 WebView 实例，相比之下，混合技术栈就简单多了。因为页面就是网页，所以容器已经设置好了 WebView ，开发者直接写页面就行了</p>
+<h2 id="框架的种类"><a href="#框架的种类" class="headerlink" title="框架的种类"></a>框架的种类</h2><p>混合技术栈的各种容器框架之中，历史最悠久是 PhoneGap，诞生于2009年。后来在2011年被 Adobe 公司收购，改名为 Adobe PhoneGap。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app19.jpg" class="" title="Xcode">
+</div>
+
+<p>Adobe 公司将 PhoneGap 的核心代码，后来都捐给了 Apache 基金会，作为一个全新的开源项目，名为 <a href="https://cordova.apache.org/" target="_blank" rel="noopener">Apache Cordova</a>。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app20.jpg" class="" title="Xcode">
+</div>
+
+<p>PhoneGap 和 Cordova 现在是两个独立发展的开源项目，但是彼此有密切的关系，可以简单理解成 Cordova 是 PhoneGap 的内核，PhoneGap 是 Cordova 的发行版。</p>
+<p>后来，其他人也开始基于 Cordova 封装自己的框架，所以市场上有许多基于 Cordova 的开源框架，比较著名的有 <a href="https://ionicframework.com/" target="_blank" rel="noopener">Ionic</a>、<a href="https://monaca.io/" target="_blank" rel="noopener">Monaca</a>、<a href="https://framework7.io/" target="_blank" rel="noopener">Framework7</a> 等。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app21.jpg" class="" title="Xcode">
+</div>
+
+<p>所有这些框架的共同点，都是使用 Web技术（HTML5 + CSS3 + JavaScript）开发页面，再由框架分别打包成 iOS 和 安卓 的 App 安装包，它们的优点是开发简单、成本低、周期短，缺点是功能和性能很有限</p>
+<h2 id="Ionic"><a href="#Ionic" class="headerlink" title="Ionic"></a>Ionic</h2><p>基于 Cordova 的框架，用法都大同小异，下面就以 Ionic 为例，演示如何加载外部网页。</p>
+<p>首先，根据<a href="https://ionicframework.com/docs/react/your-first-app" target="_blank" rel="noopener">官方文档</a>，生成项目的脚手架。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install -g ionic@latest</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ionic start myApp blank --<span class="built_in">type</span>=react</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> myApp</span></span><br></pre></td></tr></table></figure>
+
+<p>接着打开 <span style="color: red;">src/pages/Home.tsx</span> 文件，插入 <span style="color: red;">iframe</span> 标签即可</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app22.jpg" class="" title="Xcode">
+</div>
+
+<p>上面代码中，由于页面本身就是网页，所以可以直接用 <span style="color: red;">iframe</span> 标签插入外部网页。</p>
+<p>然后，在本机起一个 Web 服务，看看 Demo 的效果。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ionic serve</span></span><br></pre></td></tr></table></figure>
+
+<p>上面命令会自动打开浏览器窗口，访问本机的8100端口，在浏览器中显示网页效果。</p>
+<p>如果一切正常，在命令行窗口按 Ctrl+c，退出服务。编译成 App 安装包的方法可以参考<a href="https://ionicframework.com/docs/react/your-first-app#build-a-native-app" target="_blank" rel="noopener">官方文档</a>。</p>
+<h1 id="跨平台技术"><a href="#跨平台技术" class="headerlink" title="跨平台技术"></a>跨平台技术</h1><p>上面的混合技术栈使用 HTML 语言编写页面，再用 WebView 控件加载页面，所以只写一次页面，就能支持多个平台。跨平台技术栈也能做到多平台支持，但是原理完全不同。</p>
+<p>跨平台技术栈的框架，都是使用自己的语法编写页面，不使用 Web 技术，编译的时候再将其转为原生控件，或者使用自己的底层控件，生成 原生 App。这样就完美解决了 Web 页面性能不佳的问题。下面介绍三个这样的框架</p>
+<ul>
+<li>React Native: 使用 JavaScipt 语言编写页面</li>
+<li>Xamarin：使用 C# 语言编写页面</li>
+<li>Flutter：使用 Dart 语言编写页面</li>
+</ul>
+<h2 id="React-Native"><a href="#React-Native" class="headerlink" title="React Native"></a>React Native</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>2013年， Facebook 公司发布了 React 框架。这个框架是为网页开发设计的，核心思想是在网页之上，建立一个 UI 的抽象层，所有数据操作都在这个抽象层完成（即在内存里面完成），然后再渲染成网页的 DOM 结构，这样就提升了性能。</p>
+<p>很快，工程师们就意识到了，UI 抽象层本质上是一种数据结构，与底层设备无关，不仅可以渲染成网页，也可以渲染成手机的原生页面。这样的话，只要写一次 React 页面，就能分别编译成 iOS 和安卓的原生 App。这就是 React Native 项目的由来。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app23.jpg" class="" title="React Native">
+</div>
+
+<p>注意，React Native 虽然也使用 JavaScript 语言，并且写法看上去像 Web 页面，但其实所有控件都是自己定义的，编译时再一一翻译为对应的原生控件。举例来说，React Native 的文本渲染控件是 <span style="color: red;"><Text></span> ，翻译成 iOS 控件为 <span style="color: red;">UIView</span> ，翻译成安卓控件为 <span style="color: red;">TextView</span> 。这种做即保证了性能，又做到了跨平台支持，所以一诞生就引起开发者的关注，成了热门技术。</p>
+<p>还有一个 <a href="https://www.nativescript.org/" target="_blank" rel="noopener">NativeScript</a> 框架，跟 React Native 很像，也是使用 JavaScript 语言，然后编译成原生控件。不过，它的开发模型是基于 Angular.js，而不是 React。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>下面就是 React Native 加载外部网页的实例。为了方便使用，官方团队提供了一个封装好的工具集，叫做 Expo。第一步，在手机安装 Expo 的 App 客户端（<a href="https://itunes.apple.com/app/apple-store/id982107779" target="_blank" rel="noopener">App Store</a>，<a href="https://play.google.com/store/apps/details?id=host.exp.exponent" target="_blank" rel="noopener">Google Play</a>）。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app24.jpg" class="" title="Expo">
+</div>
+
+<p>然后，在命令行安装脚手架工具 <span style="color: red;">expo-cli</span> ，新建一个示意项目。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install -g expo-cli</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> expo init rnDemo</span></span><br></pre></td></tr></table></figure>
+
+<p>新建项目时，会要求你选择项目模板，可以选 <span style="color: red;">minimum</span> 模板。然后，还会要求你填写项目描述 <span style="color: red;">displayName</span> ，这个可以随便写。</p>
+<p>然后，安装 React Native 自己的 WebView 控件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> rnDemo</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install --save react-native-webview</span></span><br></pre></td></tr></table></figure>
+
+<p>接着，打开主页面的脚本文件 <span style="color: red;">App.js</span> ，将其改成下面的代码。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app25.jpg" class="" title="App.js">
+</div>
+
+<p>上面代码中，React Native 自身的 <span style="color: red;">WebView</span> 控件，编译时会分别转为 iOS 和安卓的原生 WebView 控件。</p>
+<p>接下来，预览页面效果。可以先把它编译成 Web 版，在浏览器预览，这样比较快，立刻就能看到效果。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm run web</span></span><br></pre></td></tr></table></figure>
+
+<p>运行上面的命令，命令行会出现一个二维码。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app26.jpg" class="" title="二维码">
+</div>
+
+<p>这时可以打开手机端的 Expo 客户端，扫描这个二维码，就会显示 App 的页面。注意，计算机和手机必须在同一个局域网。</p>
+<h3 id="React-Native-的问题"><a href="#React-Native-的问题" class="headerlink" title="React Native 的问题"></a>React Native 的问题</h3><p>React Native 的想法虽然很美好，但是实际开发中出现了各种各样的问题。</p>
+<p>最主要的一个问题是， UI 抽象层翻译出来的 iOS 和安卓原生页面，做不到完全一致，尤其是复杂页面，样式或功能存在差异。编译出来两个平台的原生 App 往往是一个正常，另一个会出现各种奇怪的小毛病。React Native 的底层还是没有做到无缝适配，它至今没有发布 1.0 版（2019年底是 0.61 版），这多多少少也说明了一些问题。</p>
+<p>如果你想用 React Native 做到 iOS 和安卓体验一致，并且充分发挥原生控件的功能，就需要同时熟悉 React Native、iOS、安卓三个平台，这对开发者的要求实在太高了。Airbnb 公司在使用 React Native 两年后，宣布放弃，改用原生技术栈。他们写了一篇<a href="https://medium.com/airbnb-engineering/sunsetting-react-native-1868ba28e30a" target="_blank" rel="noopener">很长的文章</a>，解释为什么这么做，React Native 到底有什么问题，大家可以参考那篇文章。</p>
+<h2 id="Xamarin"><a href="#Xamarin" class="headerlink" title="Xamarin"></a>Xamarin</h2><p>Xamarin 是微软公司的跨平台 App 开发框架，原理跟 React Native 很相似，只不过它的语言是 C#。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app27.jpg" class="" title="Xamarin logo">
+</div>
+
+<p>它的使用需要 Visual Studio，这里就不举例了。根据官方文档，WebView 的用法如下。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app28.jpg" class="" title="Xamarin logo">
+</div>
+
+<p>上面代码中，首先新建了一个 WebView 控件的实例，然后把这个实例放到布局上，跟原生 App 的语法很像。</p>
+<h2 id="Flutter"><a href="#Flutter" class="headerlink" title="Flutter"></a>Flutter</h2><p><a href="https://flutter.dev/" target="_blank" rel="noopener">Flutter</a> 是谷歌公司最新的跨平台开发框架。它为了解决 React Native 的平台差异问题，采用了一个完全不同的方案。</p>
+<p>它自己实现了一套控件。打包的时候，会把这套控件打包进每一个 App，因此不存在调用原生控件的问题。不管什么平台，都调用内嵌的自己那套控件，就能做到 iOS 和安卓体验完全一致。</p>
+<p>Flutter 历史还不长，应用还不广泛，API 也没稳定下来。但是很值得关注。</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app29.jpg" class="" title="Xamarin logo">
+</div>
+
+<p>加载外部网页的实例，可以参考 Flutter 官方团队的<a href="https://medium.com/flutter/the-power-of-webviews-in-flutter-a56234b57df2" target="_blank" rel="noopener">这篇文章</a>。核心代码如下：</p>
+<div class="img">
+  <img src="/blog/2020/05/07/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8B/app30.jpg" class="" title="Xamarin logo">
+</div>
+
+<p>上面代码使用的是 Dart 语言。它是 Flutter 的官方语言，接近 JavaScript 语法，但是多了静态类型支持。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>通过上面的介绍，希望大家已经了解了各种技术栈的特点</p>
+<ul>
+<li>原生技术栈的性能和体验最好，对于复杂的大型 App，如果条件允许，应该采用这种方式来开发</li>
+<li>混合技术栈的成本低，灵活性好，对性能要求不高的简单 App ，尤其是纯展示性的页面，可以采用这种方式开发</li>
+<li>跨平台技术栈适用于，存在外部或内部条件限制，只有一个团队开发跨平台 App 的情况</li>
+</ul>
+<hr>
+<p>文章来源: <a href="http://www.ruanyifeng.com/blog/2019/12/mobile-app-technology-stack.html" target="_blank" rel="noopener">阮一峰的个人博客</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/%E6%89%8B%E6%9C%BAApp/" rel="tag"># 手机App</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/2020/05/06/H5%E6%89%8B%E6%9C%BAApp%E5%BC%80%E5%8F%91%E4%B8%8A/" rel="prev" title="H5 手机 App 开发 - 概念篇">
+      <i class="fa fa-chevron-left"></i> H5 手机 App 开发 - 概念篇
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#手机-App-的技术栈"><span class="nav-number">1.</span> <span class="nav-text">手机 App 的技术栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原生-App-技术栈-（native-technology-stack）"><span class="nav-number">1.1.</span> <span class="nav-text">原生 App 技术栈 （native technology stack）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#混合-App-技术栈-（hybrid-technology-stack）"><span class="nav-number">1.2.</span> <span class="nav-text">混合 App 技术栈 （hybrid technology stack）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨平台-App-技术栈-（cross-platform-technology-stack）"><span class="nav-number">1.3.</span> <span class="nav-text">跨平台 App 技术栈 （cross-platform technology stack）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">1.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WebView-控件"><span class="nav-number">2.</span> <span class="nav-text">WebView 控件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原生技术栈"><span class="nav-number">3.</span> <span class="nav-text">原生技术栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Xcode"><span class="nav-number">3.1.</span> <span class="nav-text">Xcode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-Studio"><span class="nav-number">3.2.</span> <span class="nav-text">Android Studio</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#混合技术栈"><span class="nav-number">4.</span> <span class="nav-text">混合技术栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#框架的种类"><span class="nav-number">4.1.</span> <span class="nav-text">框架的种类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ionic"><span class="nav-number">4.2.</span> <span class="nav-text">Ionic</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#跨平台技术"><span class="nav-number">5.</span> <span class="nav-text">跨平台技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#React-Native"><span class="nav-number">5.1.</span> <span class="nav-text">React Native</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理"><span class="nav-number">5.1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">5.1.2.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React-Native-的问题"><span class="nav-number">5.1.3.</span> <span class="nav-text">React Native 的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xamarin"><span class="nav-number">5.2.</span> <span class="nav-text">Xamarin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flutter"><span class="nav-number">5.3.</span> <span class="nav-text">Flutter</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Shanzhegu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shanzhegu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
